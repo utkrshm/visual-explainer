@@ -1,11 +1,13 @@
 [project]
 name = "visual-explainer"
 version = "0.1.0"
-description = "Add your description here"
+description = "An AI tool that generates a minute long explainer video on any topic"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "langchain>=1.1.2",
     "langgraph>=1.0.4",
+    "manim>=0.19.1",
+    "moviepy>=2.2.1",
     "tavily-python>=0.7.13",
 ]
