@@ -13,3 +13,6 @@ dependencies = [
     "moviepy>=2.2.1",
     "tavily-python>=0.7.13",
 ]
+
+[tool.pyright]
+typeCheckingMode = "off"   
