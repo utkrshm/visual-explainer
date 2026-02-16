@@ -16,7 +16,7 @@ class BaseAgent:
         tools_registry: Optional[Dict[str, Callable]] = None, 
         tools_schemas: Optional[List[Dict[str, Any]]] = None, 
         output_schema: Optional[BaseModel] = None, 
-        extractor_model: Optional[str] = "llama3-70b-8192"
+        extractor_model: Optional[str] = "meta-llama/llama-4-scout-17b-16e-instruct",
     ):
         assert isinstance(llm_client, Groq) or isinstance(llm_client, AsyncGroq), "You must provide an LLM client"
         assert isinstance(model, str), "The model must be a string"

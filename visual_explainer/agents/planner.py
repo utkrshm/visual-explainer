@@ -33,4 +33,4 @@ if __name__ == "__main__":
         {"role": "user", "content": "Explain the concept of 'Pythagoras theorem'"}
     ])
     
-    print(output.model_dump_json())
+    print(output.model_dump_json(indent=4))
