@@ -19,14 +19,9 @@ You must generate exactly two outputs:
 ## 1. storyboard
 A clear, chronological description of what appears on screen during this scene. Write in straightforward language, describing visual events in the order they occur and tying them to specific phrases in the script.
 
-**What to include:**
-- Specific objects (right triangle, circle, equation "E=mc²", text label, arrow, graph, etc.)
-- Colors when they aid clarity or meaning (BLUE square, RED line, WHITE text)
-- Positions (center of screen, top-left corner, below the equation, to the right of the triangle)
-- Actions (draws on, fades in, writes itself out, transforms into, slides upward, rotates 90 degrees, scales to 2x size)
-- Timing cues (as "phrase from script" is said, when narrator mentions "X", during the word "Y")
-
 Write as a flowing description, not a list. Make it concrete enough that someone could visualize the scene without seeing it.
+
+Don't make it too long, keep it between 50-100 words.
 
 ## 2. animation_instructions
 Step-by-step animation guidance for the Animator. Describe the sequence of animations, their purpose, and rough timing. The Animator will use this to write actual Manim code.

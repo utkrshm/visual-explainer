@@ -1,4 +1,4 @@
-
+import os
 from typing import List
 
 from pydantic import BaseModel, Field
@@ -13,10 +13,10 @@ class PlannerOutput(BaseModel):
     scenes: List[Scene] = Field(description="The chronological list of scenes for the video.")
 
 class Planner(BaseAgent):
-    def __init__(self, client, model="openai/gpt-oss-20b"):
+    def __init__(self, client):
         super().__init__(
             llm_client=client,
-            model=model,
+            model=os.getenv("PLANNER_LLM", ""),
             system_prompt=PLANNER_PROMPT,
             agent_name="Planner",
             output_schema=PlannerOutput

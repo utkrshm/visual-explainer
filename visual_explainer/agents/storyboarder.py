@@ -1,3 +1,5 @@
+import os
+
 from pydantic import BaseModel, Field
 
 from .agent import BaseAgent
@@ -9,10 +11,10 @@ class StoryboarderOutput(BaseModel):
     animation_instruction: str = Field(description="The instruction to give to the Animator for the animation of this scene")
 
 class Storyboarder(BaseAgent):
-    def __init__(self, client, model="openai/gpt-oss-20b"):
+    def __init__(self, client):
         super().__init__(
             llm_client=client,
-            model=model,
+            model=os.getenv("STORYBOARDER_LLM", ""),
             system_prompt=STORYBOARDER_PROMPT,
             agent_name="Storyboarder",
             output_schema=StoryboarderOutput

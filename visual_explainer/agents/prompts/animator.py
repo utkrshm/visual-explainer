@@ -13,8 +13,6 @@ You will receive a single scene containing:
 - `animation_instructions`: Step-by-step animation guidance with timing
 
 # Output
-Generate a single field:
-
 ## manim_code
 Complete, executable Manim CE Python code that implements the scene.
 
@@ -22,7 +20,7 @@ Complete, executable Manim CE Python code that implements the scene.
 ```python
 from manim import *
 
-class Scene{id}(Scene):  # Use actual scene number: Scene1, Scene2, etc.
+class VideoScene(Scene):  # Use actual scene number: Scene1, Scene2, etc.
     def construct(self):
         # Your animation code here
         pass
@@ -30,8 +28,7 @@ class Scene{id}(Scene):  # Use actual scene number: Scene1, Scene2, etc.
 
 **Critical requirements:**
 - Must import: `from manim import *`
-- Class name: `Scene{id}` (e.g., Scene1, Scene2, Scene3)
-- Must inherit from `Scene`
+- Class must inherit from `Scene`
 - Must have `construct(self)` method
 - Must be self-contained (no external assets or web calls)
 - All animations wrapped in `self.play()`
@@ -48,9 +45,9 @@ class Scene{id}(Scene):  # Use actual scene number: Scene1, Scene2, etc.
 
 Think in screen coordinates. The safe visible region is roughly:
 - Horizontal:  x in [-6, 6]
-- Vertical:    y in [-3.4, 3.4]
+- Vertical:    y in [-3, 3]
 
-Every visible mobject (including text and rectangles) must stay inside this region with at least 0.2 units of padding.
+Every visible mobject (including text and rectangles) must stay inside this region with at least 0.3 units of padding.
 
 0. **Global frame-fit rule (APPLIES OFTEN).**
    After constructing any large diagram or after adding any major text label, you MUST:
@@ -74,15 +71,7 @@ Every visible mobject (including text and rectangles) must stay inside this regi
    - No long paragraphs.
    - MAX ~3 lines per Tex/Text block.
 
-3. **Text formatting rules.**
-   - Use LaTeX line breaks "\\\\" inside Tex/MathTex.
-   - Never use "\\n" inside Tex/MathTex.
-   - Keep font_size between 28 and 48.
-   - For text over diagrams, consider:
-
-         text.add_background_rectangle(buff=0.1, opacity=0.25)
-
-4. **Where text is allowed to live.**
+3. **Where text is allowed to live.**
    - Titles: title.to_edge(UP).
    - Explanations / bullets: next_to(main_object, DOWN, buff=0.3–0.6).
    - Short labels attached to objects:
@@ -96,7 +85,7 @@ Every visible mobject (including text and rectangles) must stay inside this regi
 
      If this is violated, move the label BELOW the relevant object and re-center the whole layout with the global frame-fit rule (rule 0).
 
-5. **Global layout for multi-part diagrams (16:9 safe).**
+4. **Global layout for multi-part diagrams (16:9 safe).**
    - Example for left/right parts:
 
          diagram_group = VGroup(left_part, right_part)
@@ -112,7 +101,7 @@ Every visible mobject (including text and rectangles) must stay inside this regi
          full.scale_to_fit_width(11.5)
          full.move_to(ORIGIN)
 
-6. **Horizontal extent limits (padding rule).**
+5. **Horizontal extent limits (padding rule).**
    - Do not place content beyond x = ±6.
    - If any object's bounding box crosses ±5.5:
        a) reduce spacing between parts,
@@ -120,13 +109,7 @@ Every visible mobject (including text and rectangles) must stay inside this regi
        c) reduce font_size for labels,
        d) group everything in a VGroup and scale_to_fit_width(11.5), move_to(ORIGIN).
 
-7. **Autoshrink for wide diagrams.**
-   - When adding new elements that widen the diagram:
-       - Recompute a single VGroup with all the main components and texts.
-       - Call scale_to_fit_width(11.5) + move_to(ORIGIN) again.
-   - Never rely only on manual coordinates for final positioning.
-
-8. **Text safety heuristic (mental checklist).**
+6. **Text safety heuristic (mental checklist).**
    For every Text / Tex / MathTex you create:
    - Place it relative to something (next_to, to_edge, aligned_edge).
    - Check it is inside x ∈ [-5, 5].
@@ -135,12 +118,7 @@ Every visible mobject (including text and rectangles) must stay inside this regi
        - Add it BELOW the entire main diagram.
        - Then apply the global frame-fit rule (rule 0).
 
-9. **Content minimization.**
-    - Extract core visual concepts from storyboard.
-    - Use diagrams, formulas, and motion instead of long text.
-    - Ignore extraneous text that would bloat the scene.
-
-10. **Visualize the concept, not the narration.**
+7. **Visualize the concept, not the narration.**
     - The script is spoken audio - don't display it all on screen.
     - Show visual representations of what's being explained.
     - Convert descriptions into concise, visual steps.
@@ -229,7 +207,7 @@ obj.shift(UP*2 + LEFT*3)  # Move by vector
 # Constants: UP, DOWN, LEFT, RIGHT, ORIGIN, UL, UR, DL, DR
 ```
 
-## Colors:
+## Colors (ONLY USE THIS COLORS):
 ```python
 BLUE, RED, GREEN, YELLOW, WHITE, BLACK, PURPLE, ORANGE, PINK, GRAY
 # Or custom: color=rgb_to_color([r, g, b])
@@ -255,12 +233,4 @@ Visual clarity:
 - Sequential reveals - don't overcrowd the screen at once
 - Scale objects appropriately (not too small, not too large)
 - Leave whitespace for visual breathing room
-
-Remember:
-- No overlapping text
-- Text stays inside safe frame with padding
-- Keep labels off extreme edges; prefer BELOW or ABOVE placement
-- Sequential visual flow matching the storyboard
-- Short, concise text (4-6 words max)
-- Visually clear diagrams
 '''
